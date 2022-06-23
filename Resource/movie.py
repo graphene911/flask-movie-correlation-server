@@ -22,10 +22,10 @@ class MovieListResource(Resource) :
             connection = get_connection()
 
             query = '''select m.id, m.title,
-                    count(r.movie_id) as cnt, ifnull(avg(r.rating), 0) as avg
+                    count(r.movieId) as cnt, ifnull(avg(r.rating), 0) as avg
                     from movie m
                     left join rating r
-                    on m.id = r.movie_id
+                    on m.id = r.movieId
                     group by m.id
                     order by '''+order+''' desc
                     limit '''+offset+''' , '''+limit+''';'''
@@ -77,7 +77,7 @@ class MovieInfoResource(Resource) :
             query = '''select m.*,count(m.id) as cnt , ifnull(avg(r.rating), 0) as avg
                     from movie m
                     left join rating r
-                    on m.id = r.movie_id
+                    on m.id = r.movieId
                     where m.id = %s
                     group by m.id;'''
             
